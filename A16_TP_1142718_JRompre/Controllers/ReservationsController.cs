@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using A16_TP_1142718_JRompre.Data;
 using A16_TP_1142718_JRompre.Models;
+using System.Dynamic;
+using System.Diagnostics;
 
 namespace A16_TP_1142718_JRompre.Controllers
 {
@@ -153,17 +155,24 @@ namespace A16_TP_1142718_JRompre.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> ConfirmerReservation()
+        [ActionName("Confirmer")]
+        public async Task<IActionResult> ConfirmerReservation(int autoId, int clientId)
         {
             var client = await _context.Client.FindAsync(clientId);
             var auto = await _context.Automobile.FindAsync(autoId);
 
-            if(client == null || auto == null)
+            if (client == null || auto == null)
             {
                 return NotFound();
             }
 
-            return View(new { client = client, auto = auto });
+            ViewModel vm = new ViewModel();
+            vm.Automobile = auto;
+            vm.Client = client;
+            vm.DateReservation = DateTime.Now;
+            vm.DateSortie = DateTime.Now;
+
+            return View(vm);
         }
 
         private bool ReservationExists(int id)

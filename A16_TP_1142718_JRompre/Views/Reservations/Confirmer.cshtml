@@ -1,0 +1,50 @@
+﻿@model ViewModel
+
+@{
+    ViewData["Title"] = "Confirmer";
+}
+
+<div class="container text-center">
+    <h1>Confirmer Reservation</h1>
+
+    <div class="col-6 offset-3">
+        <div class="">
+            <h3 class="text-decoration-underline">Client</h3>
+            <div class="text-start col-6 offset-3">
+                <p>Prenom: @Model.Client.Prenom</p>
+                <p>Nom: @Model.Client.Nom</p>
+                <p>Email: @Model.Client.Email</p>
+            </div>
+        </div>
+        <hr class="hr w-75 opacity-50"/>
+        <div class="">
+            <h3 class="text-decoration-underline">Automobile</h3>
+            <div class="text-start col-6 offset-3">
+                <p>Marque: @Model.Automobile.Marque</p>
+                <p>Modèle: @Model.Automobile.Model</p>
+                <p>Année: @Model.Automobile.Annee</p>
+                <p>Licence: @Model.Automobile.Licence</p>
+            </div>
+        </div>
+        <hr class="hr w-75 opacity-50" />
+        <div>
+            <h3 class="text-decoration-underline">Date de réservation</h3>
+            <div class="col-6 offset-3">
+                @Html.LabelFor(m => m.DateReservation, Model.DateReservation.ToString("yyyy-MM-dd"))
+            </div>
+        </div>
+        <hr class="hr w-75 opacity-50" />
+        <div class="">
+            <h3 class="text-decoration-underline">Date de prise de possession</h3>
+            <div class="col-6 offset-3">
+                @Html.TextBoxFor(m => m.DateSortie, "{0:yyyy-MM-dd}", new { @type="date", @value = "", @min =  Model.DateSortie.ToString("yyyy-MM-dd")})
+            </div>
+        </div>
+    </div>
+
+</div>
+<p>
+</p>
+<p>
+</p>
+

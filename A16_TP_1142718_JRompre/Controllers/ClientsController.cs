@@ -155,6 +155,7 @@ namespace A16_TP_1142718_JRompre.Controllers
         public async Task<IActionResult> Choisir(int autoId)
         {
             ViewBag.autoId = autoId;
+            
             return View(await _context.Client.ToListAsync());
         }
 
