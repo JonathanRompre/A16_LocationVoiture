@@ -4,9 +4,9 @@
     {
         public int Id { get; set; }
         public int AutomobileId { get; set; }
-        public DateTime DateReservation { get; set; }
-        public DateTime DateSortie { get; set; }
-        public DateTime DateRetour { get; set; }
+        public string DateReservation { get; set; }
+        public string DateSortie { get; set; }
+        public string DateRetour { get; set; }
 
         public Client? Client { get; set; }
     }

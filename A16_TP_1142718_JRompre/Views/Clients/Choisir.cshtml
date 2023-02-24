@@ -8,7 +8,6 @@
 
 <p>
     <a asp-action="Create">Create New</a><br />
-    @ViewBag.autoId
 </p>
 <table class="table">
     <thead>
@@ -38,9 +37,8 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                <a asp-controller="Reservations" asp-action="Confirmer" asp-route-id="@item.Id">Edit</a>
-                    @Html.ActionLink("Confirmer","Confirmer","Reservations",new {autoId = ViewBag.autoId, clientId = item.Id})
-                    
+                <a asp-controller="Reservations" asp-action="Confirmer" asp-route-id="@item.Id">Edit</a> | 
+                @Html.ActionLink("Confirmer","Confirmer","Reservations",new {autoId = ViewBag.autoId, clientId = item.Id})
             </td>
         </tr>
 }

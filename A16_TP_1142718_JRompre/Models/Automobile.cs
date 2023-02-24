@@ -1,4 +1,6 @@
-﻿namespace A16_TP_1142718_JRompre.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace A16_TP_1142718_JRompre.Models
 {
     public class Automobile
     {
@@ -9,6 +11,7 @@
         public string Motopropulsion { get; set; }
         public string Transmission { get; set; }
         public string Licence { get; set; }
+        [DataType(DataType.Currency)]
         public double Prix { get; set; }
 
     }

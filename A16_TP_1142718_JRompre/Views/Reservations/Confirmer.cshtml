@@ -16,7 +16,7 @@
                 <p>Email: @Model.Client.Email</p>
             </div>
         </div>
-        <hr class="hr w-75 opacity-50"/>
+        <hr class="hr w-75 opacity-50 mx-auto" />
         <div class="">
             <h3 class="text-decoration-underline">Automobile</h3>
             <div class="text-start col-6 offset-3">
@@ -26,19 +26,28 @@
                 <p>Licence: @Model.Automobile.Licence</p>
             </div>
         </div>
-        <hr class="hr w-75 opacity-50" />
+        <hr class="hr w-75 opacity-50 mx-auto" />
         <div>
             <h3 class="text-decoration-underline">Date de réservation</h3>
             <div class="col-6 offset-3">
-                @Html.LabelFor(m => m.DateReservation, Model.DateReservation.ToString("yyyy-MM-dd"))
+                @Model.DateReservation
             </div>
         </div>
-        <hr class="hr w-75 opacity-50" />
+        <hr class="hr w-75 opacity-50 mx-auto" />
         <div class="">
             <h3 class="text-decoration-underline">Date de prise de possession</h3>
-            <div class="col-6 offset-3">
-                @Html.TextBoxFor(m => m.DateSortie, "{0:yyyy-MM-dd}", new { @type="date", @value = "", @min =  Model.DateSortie.ToString("yyyy-MM-dd")})
-            </div>
+        </div>
+        <div class="m-2">
+             <form asp-action="Enregistrer">
+                <div class="col-6 offset-3">
+                    @Html.TextBoxFor(m => m.DateSortie, "{0:yyyy-MM-dd}", new { @type="date", @value = "", @min =  Model.DateSortie})
+                </div>
+                 @Html.Hidden("autoId",Model.Automobile.Id)
+                 @Html.Hidden("clientId",Model.Client.Id)
+                 @Html.Hidden("dateReservation",Model.DateReservation)
+                <hr class="hr w-75 opacity-50 mx-auto" />
+                <input type="submit" class="btn btn-primary" value="Enregistrer" />
+             </form>
         </div>
     </div>
 

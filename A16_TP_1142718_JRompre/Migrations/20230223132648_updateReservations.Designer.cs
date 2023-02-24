@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace A16_TP_1142718_JRompre.Migrations
 {
     [DbContext(typeof(A16_TP_1142718_JRompreContext))]
-    [Migration("20230221170546_unwantedColumnCleanup")]
-    partial class unwantedColumnCleanup
+    [Migration("20230223132648_updateReservations")]
+    partial class updateReservations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,11 +138,13 @@ namespace A16_TP_1142718_JRompre.Migrations
                     b.Property<int?>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DateReservation")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("DateReservation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DateSortie")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("DateSortie")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

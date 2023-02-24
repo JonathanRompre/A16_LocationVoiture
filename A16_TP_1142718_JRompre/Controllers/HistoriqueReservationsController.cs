@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using A16_TP_1142718_JRompre.Data;
 using A16_TP_1142718_JRompre.Models;
+using A16_TP_1142718_JRompre.DAO;
+using System.Diagnostics;
 
 namespace A16_TP_1142718_JRompre.Controllers
 {
     public class HistoriqueReservationsController : Controller
     {
         private readonly A16_TP_1142718_JRompreContext _context;
+        private SystemDao systemDao;
 
-        public HistoriqueReservationsController(A16_TP_1142718_JRompreContext context)
+        public HistoriqueReservationsController(A16_TP_1142718_JRompreContext context, IConfiguration _cfg)
         {
             _context = context;
+            systemDao = new SystemDao(_cfg);
         }
 
         // GET: HistoriqueReservations
@@ -156,6 +160,26 @@ namespace A16_TP_1142718_JRompre.Controllers
         private bool HistoriqueReservationExists(int id)
         {
           return _context.HistoriqueReservation.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> Retour(int autoId)
+        {
+
+            // get reservation
+            int resId = systemDao.GetReservationPourAutoId(autoId);
+            Debug.WriteLineIf(resId == -1, "======| No resservation for car " + autoId);
+            if (resId == -1) return Problem("A reservation for this car could not be found.");
+
+            var reservation = _context.Reservation.Where(e => e.Id == resId).FirstOrDefault();
+            _context.Entry(reservation).Reference(s => s.Client).Load();
+
+            if(reservation == null) return RedirectToAction("Louer", "Automobiles");
+
+            systemDao.addHistoriqueReservation(reservation);
+            systemDao.deleteReservation(reservation);
+
+
+            return RedirectToAction("Louer", "Automobiles");
         }
     }
 }

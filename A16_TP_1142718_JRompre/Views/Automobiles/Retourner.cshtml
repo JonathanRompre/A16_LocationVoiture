@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<A16_TP_1142718_JRompre.Models.Automobile>
 
 @{
-    ViewData["Title"] = "Location";
+    ViewData["Title"] = "Retourner";
 }
 
-<h1>Location de voitures</h1>
+<h1>Retour de location</h1>
 <br />
 <div>
-    <span>Voitures disponibles</span> | 
-    <span> @Html.ActionLink("Voitures louées","Retourner","Automobiles")</span>
+    <span> @Html.ActionLink("Voitures disponibles","Louer","Automobiles")</span> | 
+    <span> Voitures louées</span>
 </div>
 <br />
 <table class="table">
@@ -63,8 +63,7 @@
                 @Html.DisplayFor(modelItem => item.Prix)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                @Html.ActionLink("Louer","Choisir","Clients",new {autoId = item.Id})
+                    @Html.ActionLink("Retourner Automobile","Retour","HistoriqueReservations",new {autoId = item.Id})
             </td>
         </tr>
 }

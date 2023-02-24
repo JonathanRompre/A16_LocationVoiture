@@ -8,8 +8,8 @@ namespace A16_TP_1142718_JRompre.Models
         public Client Client { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM-dd-yyyy}")]
-        public DateTime DateReservation { get; set; }
+        public string DateReservation { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM-dd-yyyy}")]
-        public DateTime DateSortie { get; set; }
+        public string DateSortie { get; set; }
     }
 }

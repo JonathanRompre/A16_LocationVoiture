@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using A16_TP_1142718_JRompre.Data;
 using A16_TP_1142718_JRompre.Models;
+using A16_TP_1142718_JRompre.DAO;
 
 namespace A16_TP_1142718_JRompre.Controllers
 {
     public class AutomobilesController : Controller
     {
         private readonly A16_TP_1142718_JRompreContext _context;
+        private SystemDao AutomobileDao;
 
-        public AutomobilesController(A16_TP_1142718_JRompreContext context)
+        public AutomobilesController(A16_TP_1142718_JRompreContext context, IConfiguration _cfg)
         {
             _context = context;
+            AutomobileDao = new SystemDao(_cfg);
         }
 
         // GET: Automobiles
@@ -153,9 +156,20 @@ namespace A16_TP_1142718_JRompre.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Louer()
+        [ActionName("Louer")]
+        public IActionResult GetAutosDispo()
         {
-            return View(await _context.Automobile.ToListAsync());
+            List<Automobile> AutoDispo = AutomobileDao.GetAutoDispo();
+            return View(AutoDispo);
+        }
+
+
+        [ActionName("Retourner")]
+        public IActionResult GetAutosLouees()
+        {
+            List<Automobile> AutoLouees = AutomobileDao.GetAutoLouees();
+
+            return View(AutoLouees);
         }
 
         private bool AutomobileExists(int id)

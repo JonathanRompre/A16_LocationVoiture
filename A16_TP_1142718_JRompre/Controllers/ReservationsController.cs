@@ -169,10 +169,24 @@ namespace A16_TP_1142718_JRompre.Controllers
             ViewModel vm = new ViewModel();
             vm.Automobile = auto;
             vm.Client = client;
-            vm.DateReservation = DateTime.Now;
-            vm.DateSortie = DateTime.Now;
+            vm.DateReservation = DateTime.Now.ToString("yyyy-MM-dd");
+            vm.DateSortie = DateTime.Now.ToString("yyyy-MM-dd");
 
             return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Enregistrer(int autoId, int clientId, string dateReservation, string dateSortie){
+            Reservation res = new Reservation();
+            res.AutomobileId = autoId;
+            res.Client = _context.Client.Find(clientId);
+            res.DateReservation = dateReservation;
+            res.DateSortie = dateSortie;
+            
+            _context.Add(res);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Louer","Automobiles");
         }
 
         private bool ReservationExists(int id)
